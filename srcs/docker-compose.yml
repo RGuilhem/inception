@@ -1,0 +1,13 @@
+#version: "3.8"
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    build: requirements/nginx
+    env_file: .env
+    ports:
+      - "443:443"
+
+networks:
+  inception:
+    name: inception
