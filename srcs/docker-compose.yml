@@ -5,8 +5,36 @@ services:
     container_name: nginx
     build: requirements/nginx
     env_file: .env
+    depends_on:
+      mariadb:
+        condition: service_healthy
     ports:
       - "443:443"
+  wordpress:
+    image: wordpress
+    container_name: wordpress
+    build: requirements/wordpress
+    depends_on:
+      mariadb:
+        condition: service_healthy
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    build: requirements/mariadb
+
+volumes:
+  www:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${VOLUME_WWW_PATH}
+      o: bind
+  database:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${VOLUME_DATABASE_PATH}
+      o: bind
 
 networks:
   inception:

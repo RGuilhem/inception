@@ -25,6 +25,10 @@ clean:
 fclean: stop clean
 	docker rmi -f nginx
 	docker rm -f nginx
+	docker rmi -f mariadb
+	docker rm -f mariadb
+	docker rmi -f wordpress
+	docker rm -f wordpress
 
 re: fclean all
 
