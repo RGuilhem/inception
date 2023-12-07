@@ -29,6 +29,9 @@ fclean: stop clean
 	docker rm -f mariadb
 	docker rmi -f wordpress
 	docker rm -f wordpress
+	docker volume rm -f inception_database
+	docker volume rm -f inception_www
+	#docker network rm inception
 
 re: fclean all
 
