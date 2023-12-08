@@ -36,6 +36,8 @@ status:
 	docker compose $(COMPOSE_FULL) images
 
 fclean: stop
+	docker compose $(COMPOSE_FULL) down
+	docker volume rm inception_www
 	docker system prune -f
 	rm srcs/.env
 

@@ -4,7 +4,26 @@ services:
     image: nginx
     build: requirements/nginx
     env_file: .env
+    networks:
+      - inception_network
+    volumes:
+      - www:/var/www/html
+    restart: unless-stopped
+
+volumes:
+  www:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/graux/data/www
+      o: bind
+  database:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/graux/data/database
+      o: bind
 
 networks:
-  inception:
-    name: inception
+  inception_network:
+    name: inception_network
