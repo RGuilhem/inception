@@ -14,7 +14,12 @@ install:
 
 build: install
 	docker compose $(COMPOSE_FULL) up -d --build
+	@$(MAKE) status
 
+debug: install
+	docker compose $(COMPOSE_FULL) up -d --build
+	docker compose $(COMPOSE_FULL) logs -f
+	@$(MAKE) status
 start:
 	docker compose $(COMPOSE_FULL) start
 
@@ -31,15 +36,13 @@ mariadb:
 	@docker exec -it $$(docker ps | grep mariadb | awk '{print $$1}') sh
 
 status:
-	docker compose $(COMPOSE_FULL) ls
-	docker compose $(COMPOSE_FULL) ps
-	docker compose $(COMPOSE_FULL) images
+	docker compose $(COMPOSE_FULL) ps -a
 
 fclean: stop
 	docker compose $(COMPOSE_FULL) down
 	docker volume rm inception_www
 	docker system prune -f
-	rm srcs/.env
+	rm -rf srcs/.env
 
 re: fclean all
 
