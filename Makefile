@@ -21,6 +21,15 @@ start:
 stop:
 	docker compose $(COMPOSE_FULL) stop
 
+nginx:
+	@docker exec -it $$(docker ps | grep nginx | awk '{print $$1}') sh
+
+wordpress:
+	@docker exec -it $$(docker ps | grep wordpress | awk '{print $$1}') sh
+
+mariadb:
+	@docker exec -it $$(docker ps | grep mariadb | awk '{print $$1}') sh
+
 status:
 	docker compose $(COMPOSE_FULL) ls
 	docker compose $(COMPOSE_FULL) ps
