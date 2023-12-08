@@ -12,5 +12,7 @@ mysql -e "GRANT ALL PRIVILEGES ON \`${MYSQL_DB}\`.* TO \`${MYSQL_USER}\`@'%' IDE
 mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASS}';"
 mysql -e "FLUSH PRIVILEGES;"
 
+#TODO remove after test!!!!!
+sed -i '/^bind-address/c\bindaddress=0.0.0.0' /etc/mysql/my.cnf
 pkill mysqld
 mysqld --user=root --datadir=/var/lib/mysql
