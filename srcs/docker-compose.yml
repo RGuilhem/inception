@@ -1,7 +1,7 @@
 services:
   nginx:
     container_name: nginx
-    image: nginx:custom_nginx
+    image: nginx:custom
     build: requirements/nginx
     env_file: .env
     ports:
@@ -10,7 +10,26 @@ services:
       - inception_network
     volumes:
       - www:/var/www/html
-        #restart: unless-stopped
+    restart: unless-stopped
+
+  mariadb:
+    container_name: mariadb
+    image: mariadb:custom
+    env_file: .env
+    build:
+      context: requirements/mariadb
+      args:
+        - MYSQL_DB=${MYSQL_DB}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_USER_PASS=${MYSQL_USER_PASS}
+        - MYSQL_ROOT_PASS=${MYSQL_ROOT_PASS}
+    ports:
+      - "3306:3306"
+    networks:
+      - inception_network
+    volumes:
+      - database:/var/lib/mysql
+    #restart: unless-stopped
 
 volumes:
   www:
