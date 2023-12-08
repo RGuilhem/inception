@@ -6,7 +6,13 @@ COMPOSE_FULL = -f $(COMPOSE) -p $(NAME)
 
 all: build
 
-build:
+#TODO maybe add to host
+install:
+	./set_env.sh
+	if ! cd /home/graux/data/database 2>/dev/null; then mkdir -p /home/graux/data/database/; fi
+	if ! cd /home/graux/data/www 2>/dev/null; then mkdir -p /home/graux/data/www/; fi
+
+build: install
 	docker compose $(COMPOSE_FULL) up -d --build
 
 start:
@@ -20,22 +26,10 @@ status:
 	docker compose $(COMPOSE_FULL) ps
 	docker compose $(COMPOSE_FULL) images
 
-clean:
-	rm -rf ~/data/www/*
-	rm -rf ~/data/database/*
-
-fclean: stop clean
-	docker rmi -f nginx
-	docker rm -f nginx
-
-#docker rmi -f mariadb
-#docker rm -f mariadb
-#docker rmi -f wordpress
-#docker rm -f wordpress
-#docker volume rm -f inception_database
-#docker volume rm -f inception_www
-#docker network rm inception
+fclean: stop
+	docker system prune -f
+	rm srcs/.env
 
 re: fclean all
 
-.PHONY: all build run clean fclean re
+.PHONY: all build start stop fclean re

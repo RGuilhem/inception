@@ -3,3 +3,8 @@ services:
     container_name: nginx
     image: nginx
     build: requirements/nginx
+    env_file: .env
+
+networks:
+  inception:
+    name: inception
