@@ -7,12 +7,13 @@ RUN apk add php
 RUN apk add php-fpm
 RUN apk add wget
 RUN apk add php-mysqli
+RUN apk add mariadb-client
 
 COPY conf/www.conf /etc/php/fpm/pool.d
-COPY conf/create_wordpress.sh /bin/create_wordpress.sh
-RUN chmod +x /bin/create_wordpress.sh
+COPY conf/ /usr/local/bin/
+RUN chmod +x /usr/local/bin/create_wordpress.sh
 
-ENTRYPOINT ["create_wordpress.sh"]
+ENTRYPOINT ["/usr/local/bin/create_wordpress.sh"]
 
 EXPOSE 9000
-CMD ["tail", "-f"]
+CMD ["/usr/sbin/php-fpm82", "--nodaemonize"]
