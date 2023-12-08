@@ -23,7 +23,7 @@ clean:
 	rm -rf ~/data/database/*
 
 fclean: stop clean
-	#docker rmi -f nginx
+	docker rmi -f nginx
 	#docker rm -f nginx
 	#docker rmi -f mariadb
 	#docker rm -f mariadb
