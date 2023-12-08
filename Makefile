@@ -23,14 +23,14 @@ clean:
 	rm -rf ~/data/database/*
 
 fclean: stop clean
-	docker rmi -f nginx
-	docker rm -f nginx
-	docker rmi -f mariadb
-	docker rm -f mariadb
-	docker rmi -f wordpress
-	docker rm -f wordpress
-	docker volume rm -f inception_database
-	docker volume rm -f inception_www
+	#docker rmi -f nginx
+	#docker rm -f nginx
+	#docker rmi -f mariadb
+	#docker rm -f mariadb
+	#docker rmi -f wordpress
+	#docker rm -f wordpress
+	#docker volume rm -f inception_database
+	#docker volume rm -f inception_www
 	#docker network rm inception
 
 re: fclean all
