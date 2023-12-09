@@ -25,8 +25,11 @@ RUN mkdir -p /var/lib/mysql
 RUN chown -R mysql /var/lib/mysql
 RUN chmod 777 /var/lib/mysql
 
-COPY conf/entry.sh /bin/mdb_entry.sh
-RUN chmod +x /bin/mdb_entry.sh
+COPY conf/init_db_user.sh /bin/mdb_setup.sh
+RUN chmod +x /bin/mdb_setup.sh
+
+RUN apk add openrc
+#RUN rc-update add mariadb default
 
 EXPOSE 3306
-CMD ["mdb_entry.sh"]
+CMD ["tail", "-f"]
