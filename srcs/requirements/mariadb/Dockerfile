@@ -7,11 +7,7 @@ ARG MYSQL_ROOT_PASS
 
 RUN apk update
 RUN apk upgrade
-RUN apk add mariadb
-RUN apk add mariadb-common
-RUN apk add mariadb-server-utils
-RUN apk add mariadb-client
-
+RUN apk add mariadb mariadb-client
 
 RUN rm -f /etc/mysql/my.cnf \
 	/etc/my.cnf \
@@ -20,16 +16,17 @@ COPY conf/my.cnf /etc/mysql/my.cnf
 COPY conf/my.cnf /etc/my.cnf
 COPY conf/my.cnf ~/my.cnf
 
-RUN mkdir -p /run/mysqld
+
+RUN rm -rf /run/mysqld/mysqld.sock && mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
 RUN mkdir -p /var/lib/mysql
 RUN chown -R mysql /var/lib/mysql
 RUN chmod 777 /var/lib/mysql
 
+
 COPY conf/init_db_user.sh /bin/mdb_setup.sh
 RUN chmod +x /bin/mdb_setup.sh
-
-RUN apk add openrc
-#RUN rc-update add mariadb default
+RUN mariadb-install-db --user=mysql
+#RUN mdb_setup.sh
 
 EXPOSE 3306
-CMD ["tail", "-f"]
+CMD ["mdb_setup.sh"]
