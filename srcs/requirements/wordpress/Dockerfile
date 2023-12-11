@@ -21,9 +21,7 @@ RUN		apk add php \
 				php-pdo \
 				php-pdo_mysql \
 				php-soap \
-				#php-xmlrpc \
 				php-posix \
-				#php-mcrypt \
 				php-redis \
 				php-gettext \
 				php-ldap \

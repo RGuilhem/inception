@@ -3,7 +3,6 @@ echo "Start BASH SCRIPT" > my_bashLog.txt
 env > /tmp/test
 while ! mariadb -u $MYSQL_USER --password=$MYSQL_USER_PASS -P 3306 $WORDPRESS_DB_NAME ; do
 	sleep 3
-	#echo "mariadb -h $MYSQL_HOST -u $MYSQL_USER -p $MYSQL_USER_PASS $WORDPRESS_DB_NAME" >> my_bashLog.txt
 	echo "Error connecting to db" >> my_bashLog.txt
 done
 

@@ -26,7 +26,6 @@ RUN chmod 777 /var/lib/mysql
 COPY conf/init_db_user.sh /bin/mdb_setup.sh
 RUN chmod +x /bin/mdb_setup.sh
 RUN mariadb-install-db --user=mysql
-#RUN mdb_setup.sh
 
 EXPOSE 3306
 CMD ["mdb_setup.sh"]
