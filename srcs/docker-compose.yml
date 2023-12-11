@@ -12,7 +12,7 @@ services:
       - inception_network
     volumes:
       - www:/var/www/html
-    #restart: unless-stopped
+    restart: unless-stopped
 
   mariadb:
     container_name: mariadb
@@ -29,7 +29,7 @@ services:
       - inception_network
     volumes:
       - database:/var/lib/mysql
-    #restart: unless-stopped
+    restart: unless-stopped
   
   wordpress:
     container_name: wordpress
@@ -42,7 +42,7 @@ services:
       - www:/var/www/html
     depends_on:
       - mariadb
-    #restart: unless-stopped
+    restart: unless-stopped
 
 volumes:
   www:
