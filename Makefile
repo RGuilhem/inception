@@ -41,6 +41,7 @@ status:
 fclean: stop
 	docker compose $(COMPOSE_FULL) down
 	docker volume rm inception_www
+	docker volume rm inception_database
 	docker system prune -f
 	rm -rf srcs/.env
 
