@@ -26,10 +26,10 @@ else
 	mv wp-cli.phar /usr/local/bin/wp	
 	ls -l /var/www/html >> content.txt
 	cd /var/www/html || exit
-	wp core download --allow-root > dl_log.txt 2> dl_error_log.txt
-	wp config create --dbname=$WORDPRESS_DB_NAME --dbuser=$MYSQL_USER --dbpass=$MYSQL_USER_PASS --dbhost=$MYSQL_HOST --dbcharset="utf8" --dbcollate="utf8_general_ci" --allow-root > config_log.txt 2>config_error_log.txt
-	wp core install --url=$DOMAIN_NAME --title=$WORDPRESS_TITLE --admin_user=$WORDPRESS_DB_ADMIN --admin_password=$WORDPRESS_DB_ADMIN_PWD --admin_email=$WORDPRESS_DB_ADMIN_MAIL --skip-email --allow-root >core_install_log.txt 2>core_install_error_log.txt
-	wp user create $WORDPRESS_DB_USER $WORDPRESS_DB_MAIL --role=author --user_pass=$WORDPRESS_DB_PASSWORD --allow-root >usercreate_log.txt 2>usercreate_error_log.txt
+	wp core download --allow-root
+	wp config create --dbname=$WORDPRESS_DB_NAME --dbuser=$MYSQL_USER --dbpass=$MYSQL_USER_PASS --dbhost=$MYSQL_HOST --dbcharset="utf8" --dbcollate="utf8_general_ci" --allow-root
+	wp core install --url=$DOMAIN_NAME --title=$WORDPRESS_TITLE --admin_user=$WORDPRESS_DB_ADMIN --admin_password=$WORDPRESS_DB_ADMIN_PWD --admin_email=$WORDPRESS_DB_ADMIN_MAIL --skip-email --allow-root
+	wp user create $WORDPRESS_DB_USER $WORDPRESS_DB_MAIL --role=author --user_pass=$WORDPRESS_DB_PASSWORD --allow-root
 	echo "Done setting up" >> my_bashLog.txt
 	
 fi
