@@ -33,11 +33,12 @@ RUN		apk add php \
 				php-gd \
 				php-zlib
 
-COPY conf/www.conf /etc/php/fpm/pool.d
+RUN adduser -u 82 -D -S -G www-data www-data
+COPY conf/www.conf /etc/php82/php-fpm.d/www.conf
 COPY conf/ /usr/local/bin/
 RUN chmod +x /usr/local/bin/create_wordpress.sh
+EXPOSE 9000
 
 ENTRYPOINT ["/usr/local/bin/create_wordpress.sh"]
 
-EXPOSE 9000
 CMD ["/usr/sbin/php-fpm82", "--nodaemonize"]
